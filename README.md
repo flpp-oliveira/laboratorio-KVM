@@ -3,7 +3,7 @@
 ## Observações
 
 - O script foi testado com sucesso em um sistema
-  operacional Ubuntu 22.04.1 LTS.
+  operacional Ubuntu 22.04 LTS.
 - Certifique-se de que o arquivo packages.txt contém os
   pacotes corretos para sua instalação.
 - Certifique-se de que as configurações específicas adicionadas ao arquivo /etc/sysctl.conf são adequadas para sua rede.
