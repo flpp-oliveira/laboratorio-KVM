@@ -11,7 +11,7 @@
 
 ## Introdução
 
-Bem-vindo ao nosso repositório de laboratório KVM! Este repositório foi criado para automatizar a configuração de um laboratório virtual usando o KVM como hypervisor. Nós fornecemos três scripts bash - script-01, script-02 e script-03 - que simplificam a configuração do laboratório.
+Bem-vindo ao nosso repositório de laboratório KVM! Este repositório foi criado para automatizar a configuração de um laboratório virtual usando o KVM como hypervisor. Nós fornecemos três scripts bash - "script-01-kvm.sh", "script-02-template.sh" e "script-02-run.sh" - que simplificam a configuração do laboratório.
 
 O script-01 é responsável por configurações basicas,criação e configuração da rede, atualizar o sistema, configurações do libvirtd e instalações de pacotes que serão de uso do laboratório. O script-02 é responsável por instalar e configurar as vms, como configuração e customizações das imagens que serão necessárias em cada máquina virtual. Por fim, o script-03 é responsável por iniciar o script-01 e o script-02, garantindo assim a configuração completa e automatizada do seu laboratório KVM.
 
