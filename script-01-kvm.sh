@@ -11,8 +11,6 @@ echo "APENAS USUÁRIOS SUDO TEM PERMISSÃO"
 exit
 fi
 
-####################################################
-
 # arquivo com a lista de pacotes a serem instalados
 declare -a packages_file="./packages.txt"
 
@@ -117,5 +115,3 @@ fi
 # Show networks
 virsh net-list --all
 sleep 5
-
-

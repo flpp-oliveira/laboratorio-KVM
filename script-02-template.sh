@@ -13,7 +13,7 @@ fi
 
 
 
-# Baixar imagem do laboratorio #####
+# Baixar imagem do laboratorio #
 IMAGE_URL="http://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img"
 IMAGE_NAME=$(basename "$IMAGE_URL")
 IMAGE_DIR="/var/lib/libvirt/images"
@@ -28,6 +28,8 @@ cd /var/lib/libvirt/images/
 
 qemu-img resize $IMAGE_NAME 50G
 
+#####
+
 #customize
 virt-customize -a $IMAGE_NAME \
   --run-command 'growpart /dev/sda 1' \
@@ -41,6 +43,7 @@ virt-customize -a $IMAGE_NAME \
   --run-command 'sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/" /etc/ssh/sshd_config' \
   --run-command 'sed -i "s/#PermitRootLogin prohibit-password/PermitRootLogin yes/" /etc/ssh/sshd_config'
 
+###
 
 # Cria as imagens para seres usadas no laboratorio
 for i in {1..4}; do
@@ -54,6 +57,8 @@ for i in {1..4}; do
     echo "A imagem $NEW_IMAGE_NAME já foi criada, prosseguindo..."
   fi
 sleep 5
+
+###
 
 # Replace server0N with server0X, where X is the current iteration value
   file_name="server-$(printf '%02d' $i)-config.yaml"
