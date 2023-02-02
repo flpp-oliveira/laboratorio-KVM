@@ -34,6 +34,17 @@ Pré-Requisitos:
 
 O script lê o arquivo packages.txt para instalar todos os pacotes necessários para o funcionamento do KVM.
 
+```
+# Lê a lista de pacotes do arquivo
+readarray -t packages < "$packages_file"
+
+# Loop para instalar cada pacote na lista
+for package in "${packages[@]}"
+do
+  apt install "$package" -y 
+done
+```
+
 ### Configuração do Módulo br_netfilter
 
 Verifica se o módulo ´br_netfilter´ já está carregado no sistema, e se não estiver, o carrega e adiciona ao arquivo /etc/modules.
@@ -74,6 +85,10 @@ As configurações "net.bridge.bridge-nf-call-ip6tables", "net.bridge.bridge-nf-
 ### Habilitar e Inicia o Serviço libvirtd
 
 O script habilita e reinicia o serviço libvirtd.
+```
+systemctl enable libvirtd
+systemctl restart libvirtd
+```
 
 ### Criação da Rede de Laboratório (lab-net)
 
@@ -85,7 +100,23 @@ O script cria uma rede virtual com o nome lab-net usando o libvirt, com as segui
     Máscara de Sub-rede: 255.255.255.0
     Faixa de endereços DHCP: de 192.168.123.50 a 192.168.123.99
 
+Aqui ele verifica se uma rede chamada "lab-net" já está definida no ambiente de virtualização usando o comando "virsh net-info lab-net". Se a rede já estiver definida, o script segue. Caso contrário, o script imprime "A rede lab-net não está definida" e então define, habilita a inicialização automática e inicia a rede "lab-net" usando os arquivos de configuração "lab-net.xml". Por fim, o script mostra uma lista de todas as redes.
+```
+if virsh net-info lab-net &> /dev/null; then
+  echo "A rede lab-net já está definida."
+  sleep 3
+else
+  echo "A rede lab-net não está definida"
+  # Define and start network lab-net
+  virsh net-define --file lab-net.xml
+  virsh net-autostart lab-net
+  virsh net-start lab-net
+fi
 
+# Show networks
+virsh net-list --all
+sleep 5
+```
 
 ## script-02-template.sh
 
