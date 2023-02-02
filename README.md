@@ -11,14 +11,14 @@
 
 ## Introdução
 
-Bem-vindo ao nosso repositório de laboratório KVM! Este repositório foi criado para automatizar a configuração de um laboratório virtual usando o KVM como hypervisor. Nós fornecemos três scripts bash - "script-01-kvm.sh", "script-02-template.sh" e "script-02-run.sh" - que simplificam a configuração do laboratório.
+Bem-vindo ao nosso repositório de laboratório KVM! Este repositório foi criado para automatizar a configuração de um laboratório virtual usando o KVM como hypervisor. Nós fornecemos três scripts bash - "script-01-kvm.sh", "script-02-template.sh" e "script-03-run.sh" - que simplificam a configuração do laboratório.
 
 O script-01 é responsável por configurações basicas,criação e configuração da rede, atualizar o sistema, configurações do libvirtd e instalações de pacotes que serão de uso do laboratório. O script-02 é responsável por instalar e configurar as vms, como configuração e customizações das imagens que serão necessárias em cada máquina virtual. Por fim, o script-03 é responsável por iniciar o script-01 e o script-02, garantindo assim a configuração completa e automatizada do seu laboratório KVM.
 
 Com este repositório, você poderá criar seu próprio laboratório KVM de forma fácil e rápida, sem precisar se preocupar com a configuração manual e repetitiva das máquinas virtuais. Siga as instruções detalhadas em nossa documentação para começar a usar os scripts e criar o seu próprio laboratório KVM.
 
 ## Descrevendo os scripts
-## Script 01
+## script-01-kvm.sh
 Este script tem como objetivo instalar e configurar o host KVM. Ele começa verificando se o usuário tem permissões sudo, caso contrário, o script é encerrado. Em seguida, o sistema é atualizado e pacotes específicos são instalados a partir de uma lista em um arquivo externo. O módulo br_netfilter é verificado e carregado se necessário. As configurações do sysctl são aplicadas para permitir o forward de IP. O serviço libvirtd é habilitado e reiniciado. Uma rede virtual (lab-net) é criada e definida utilizando libvirt, verificando se já existe antes. Finalmente, a lista de redes é exibida.
 
 ### Instalação e Configuração do Host KVM
@@ -87,7 +87,7 @@ O script cria uma rede virtual com o nome lab-net usando o libvirt, com as segui
 
 
 
-## Script 02
+## script-02-template.sh
 
 Este script tem como objetivo configurar e instalar vms (máquinas virtuais). O script começa verificando se o usuário que está executando o script tem privilégios de super usuário (root), caso não tenha, o script exibirá uma mensagem informando que apenas usuários com privilégios de super usuário têm permissão e encerrará a execução.
 
@@ -202,7 +202,7 @@ virt-install --name=server-$(printf '%02d' $i) \
 echo "instalação do server-$(printf '%02d' $i) ok"
 
 ```
-## Script 03
+## script-03-run.sh
 
 Este script tem como objetivo rodar dois outros scripts, nomeados "script-01-kvm.sh" e "script-02-template.sh".
 
